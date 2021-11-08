@@ -39,6 +39,7 @@ for (int i = x; i<=y ;i++){
         printf(" %d",i);
     }
 }
+printf("\n");
 
 return 0;
 }
