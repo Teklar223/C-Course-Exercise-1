@@ -18,6 +18,13 @@ int getNthDigitAdvRec(int x, int n){
     return r;
 }
 
+int paliHelper(int x,int n, int i){
+    if (x<10)
+        return x;
+    int temp = x%10;
+    return temp*pow(10,n-i)+paliHelper(x/10,n,i+1);
+}
+
 int isArmstrongRecursion(int x, int n){
     if(x==0){
         return x;
@@ -38,15 +45,8 @@ int isArmstrong(int x){
 
 /* will return if a number is a palindrome */
 int isPalindrome(int x){
-    if (x<10)
-        return 1;
-    int n = floor(log10(absAdvRec(x)))+1;
-    int temp = getNthDigitAdvRec(x,n-1);
-    int temp2 = x%10;
-    if (temp != temp2)
-        return false;
-    x = x - pow(10,n);
-    x /=10;
-    
-    return isPalindrome(x);
+    int temp = x;
+    int n = floor(log10(absAdvRec(temp)))+1;
+    int reversed = paliHelper(x,n-1,0);
+    return x==reversed;
 }

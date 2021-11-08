@@ -39,20 +39,15 @@ int isArmstrong(int x){
 }
 /* will return if a number is a palindrome */
 int isPalindrome(int x){
+    if (x<10)
+        return 1;
     int tempx = x;
     int n = floor(log10(absAdvLoop(tempx)))+1;
-    int tempn = n;
-    int temp = 0;
-    int temp2 = 0;
-    for (int i=0; i<n/2;i++){
-        tempn = floor(log10(absAdvLoop(tempx)))+1;
-        temp = getNthDigitAdvLoop(tempx,tempn-1);
-        temp2 = x%10;
-        if (temp != temp2){
-            return false;
-        }
-        tempx = tempx - pow(10,tempn);
-        tempx /=10;
+    int reversed = 0;
+    for (int i = 1; i<=n;i++){
+        int temp = tempx%10;
+        reversed += temp*pow(10,n-i);
+        tempx /= 10;
     }
-    return true;
+    return reversed==x;
 }
